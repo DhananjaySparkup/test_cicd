@@ -1,0 +1,21 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH into AWS and deploy
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.ACCESS_KEY }}
+          username: ubuntu
+          key: ${{ secrets.SECRET_KEY }}
+          script: |
+            cd /home/ubuntu/test_cicd
+            git pull origin main
+            npm install --production
+            pm2 restart all
