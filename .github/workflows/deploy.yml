@@ -11,9 +11,9 @@ jobs:
       - name: SSH into AWS and deploy
         uses: appleboy/ssh-action@v0.1.10
         with:
-          host: ${{ secrets.ACCESS_KEY }}
+          host: ${{ secrets.AWS_HOST }}
           username: ubuntu
-          key: ${{ secrets.SECRET_KEY }}
+          key: ${{ secrets.AWS_KEY }}
           script: |
             cd /home/ubuntu/test_cicd
             git pull origin main
